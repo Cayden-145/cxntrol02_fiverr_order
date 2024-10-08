@@ -1,0 +1,104 @@
+-- 1. Session Changes
+
+In session.py @ line 219, you'll have to edit the description to how you like.
+I have included a placeholder description, but feel free to change it however you like.
+
+This is the same for /session poll and /session end, I've added a # TODO comment at all 3.
+
+            ssuEmbed = nextcord.Embed(
+                title="Session Started!",
+                description=f"""
+Our server is up! Come join us for a fantastic roleplay experience. Begin exploring different roleplay scenarios, immerse yourself, and enjoy your time here.
+
+**Server Name:** ...
+**Server Code:** ...
+**Server Owner:** ...
+
+**Session Started:** <t:{unixTimestamp}:R>
+                """,
+                color=int('%02x%02x%02x' % rgbColour, 16))
+
+At line 68 in session.py, you'll have to change the MAX_VOTERS of your poll.
+When voting, your button will start off at 0/MAX_VOTERS, and increase (i.e 1/MAX_VOTERS) as people vote.
+
+By default, it is set to 4, though you can change this to whatever value you want.
+
+-- 2. Customisation
+
+Throughout every file, you'll find multiple # (comments) which contain instructions/tips as to how you can customise it.
+
+If you want to add a thumbnail to an embed (image in the top-right):
+
+embedName.set_thumbnail("URL_TO_IMAGE")
+
+You can find the embed name next to nextcord.Embed
+for example:
+
+welcomeEmbed = nextcord.Embed
+
+-- 3. Environment Values
+
+Navigate to the .env file, this is where any important variables (sensitive info) will be stored.
+Inside, you will see the following:
+
+DISCORD_TOKEN = 'DISCORD_TOKEN_HERE'
+ERLC_API_KEY = 'ERLC_API_KEY_HERE'
+
+Starting off with the Discord Token.
+Navigate to the Discord Developer Portal: https://discord.com/developers/applications
+-> If you haven't already created an application, press the "New Application" button in the top right.
+-> Once creating a new application, simply click on it. Then, on the left of your screen, navigate to the "Bot" section...
+... Here, you'll setup your bot. Choose an icon and banner for your bot, then set the username.
+-> Once personalising your bot, press the "Reset Token" button.
+-> Copy your token, and go back to the .env file.
+
+Paste your token inside of the quotation marks for DISCORD_TOKEN
+for example:
+
+DISCORD_TOKEN = 'abc123'
+
+Then, for your ERLC_API_KEY, this can be found in the in-game settings for your private server.
+Simply copy it from the in-game settings, and edit your .env file.
+
+for example:
+
+ERLC_API_KEY = 'abc123'
+
+4. Variables
+
+Inside of variables.py, you will have two classes, those being "Important" & "Emojis"
+The three emojis can be changed however you want, or leave them as they are.
+
+If you want to use a custom discord emoji, go to a channel in your discord server -> select the emoji, and before sending add a "\" backslash before the emoji. You should then see the backslash and :name_of_emoji:
+For example: \:wave:
+
+Press enter, and you'll see <:YOUR_EMOJI_NAME:EMOJI_ID>
+Simply copy the entire message, so you have <:YOUR_EMOJI_NAME:EMOJI_ID>
+
+Then go back to variables.py, and change the emoji in quotation marks.
+for example:
+
+cooldownEmoji = '<:cooldown:123456>'
+
+! It is important you don't change the variable name, as it'll result in errors when the emoji is called throughout the codebase.
+
+5. Hyperlinks
+
+If you want to add a hyperlink (blue text which when clicks takes you to a link), simple use: "[TEXT_HERE](LINK_TO_CHANNEL_HERE)"
+
+For example, in sessions.py @ line 286, you will find [Join a department!](LINK_TO_CHANNEL_HERE)
+For the link of a channel, right click the channel -> copy link -> paste link inside of brackets (  )
+
+6. Bot Intents
+
+Going back to the discord developer portal, under the "Bot" section for your application, ensure you have the following Privileged Gateway Intents enabled.
+- Presence Intent
+- Server Members Intent *(required for welcome message)
+- Message Content Intent
+
+When inviting your bot, which can be done through the OAuth2 tab, ensure you have the following permissions checked:
+
+OAuth2 -> OAuth2 URL Generator -> select "bot" -> Administrator
+Integration type of Guild Install
+
+After that, you will have a URL which can be used to invite your application to a discord server.
